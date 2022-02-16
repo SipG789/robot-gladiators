@@ -87,7 +87,8 @@ var fight = function(enemyName) {
 
 //start the game using for statement 
   for(var i=0; i < enemyNames.length; i++) {
-      debugger;
+      var pickedEnemyName = enemyNames[i];
+      enemyHealth = 50;
     // call fight funtion with enemy-robot
-    fight(enemyNames[i]);
+    fight(pickedEnemyName);
 }
