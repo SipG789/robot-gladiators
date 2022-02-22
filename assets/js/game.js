@@ -1,19 +1,13 @@
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
 
-console.log(enemyNames);
-console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[3]);
-
+  return value;
+};
 
 // fight function
 var fight = function(enemy) {
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
     //repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {
 
@@ -84,18 +78,6 @@ var startGame = function() {
   //reset player stats 
   playerInfo.reset();
 
-  // in startGame () 
-  playerInfo.health = 100;
-  playerInfo.attack = 10;
-  playerInfo.money = 10;
-
-//function to generate a random numeric value 
-var randomNumber = function () {
-  pickedEnemyObj.health = randomNumber(40,60);
-
-  return value;
-};
-
 //start the game using for statement 
   for(var i=0; i < enemyInfo.length; i++) {
     if (playerInfo.health > 0) {
@@ -105,11 +87,8 @@ var randomNumber = function () {
       //pick new enemy to fight based on the index of the enemyNames array
       var pickedEnemyObj = enemyInfo[i];
 
-      //reset enemyHealth before starting new fight 
-      enemyHealth = Math.floor(Math.random() * 21) + 40;
-
-      //use debugger to pause script from running and check what's going on at that moment in the code 
-      //debugger;
+      // set health for picked enemy
+      pickedEnemyObj.health = randomNumber(40, 60);
 
       //pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter. 
       fight(pickedEnemyObj);
@@ -133,20 +112,11 @@ var randomNumber = function () {
 
   //after the loop ends, player is either out of health or enemies to fight so run the endGame function
   endGame();
-
-  //play again 
-  startGame();
 };
 
 // function to end the entire game 
 var endGame = function () {
-
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
+  window.alert("This game has now ended. Let's see how you did!");
 
   //if player is still alive, player wins!
   if (playerInfo.health > 0) {
@@ -168,15 +138,9 @@ var endGame = function () {
   }
 };
 
+
+//shop function 
 var shop = function () {
-
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
-
   //ask player what they'd like to do
   var shopOptionPrompt = window.prompt (
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
@@ -206,6 +170,8 @@ var shop = function () {
       break;
   }
 };
+
+
 
 // player info 
 var playerInfo = {
@@ -255,6 +221,11 @@ var enemyInfo = [
     attack: randomNumber(10,14)
   }
 ];
+
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
 
 //start the game when the page loads
 startGame();
