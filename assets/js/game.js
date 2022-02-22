@@ -1,20 +1,13 @@
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
 
-console.log(enemyNames);
-console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[3]);
-
+  return value;
+};
 
 // fight function
 var fight = function(enemy) {
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
-    //repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {
 
       // ask player if they'd like to fight or run
@@ -41,7 +34,7 @@ var fight = function(enemy) {
   enemy.health = Math.max(0, enemy.health - damage);
 
   console.log (
-    playerInfo.name + ' attacked ' + enemyName + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
+    playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
   );
 
   // check enemy's health 
@@ -49,7 +42,7 @@ var fight = function(enemy) {
     window.alert(enemy.name + ' has died!');
 
     //award player money for winning 
-    playerInfo.money = playerInfo.money = 20;
+    playerInfo.money = playerInfo.money + 20;
 
     //leave while() loop since enemy is dead 
     break;
@@ -84,32 +77,17 @@ var startGame = function() {
   //reset player stats 
   playerInfo.reset();
 
-  // in startGame () 
-  playerInfo.health = 100;
-  playerInfo.attack = 10;
-  playerInfo.money = 10;
-
-//function to generate a random numeric value 
-var randomNumber = function () {
-  pickedEnemyObj.health = randomNumber(40,60);
-
-  return value;
-};
-
 //start the game using for statement 
   for(var i=0; i < enemyInfo.length; i++) {
     if (playerInfo.health > 0) {
       //let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it. 
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-
+      debugger;
       //pick new enemy to fight based on the index of the enemyNames array
       var pickedEnemyObj = enemyInfo[i];
 
-      //reset enemyHealth before starting new fight 
-      enemyHealth = Math.floor(Math.random() * 21) + 40;
-
-      //use debugger to pause script from running and check what's going on at that moment in the code 
-      //debugger;
+      // set health for picked enemy
+      pickedEnemyObj.health = randomNumber(40, 60);
 
       //pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter. 
       fight(pickedEnemyObj);
@@ -133,20 +111,11 @@ var randomNumber = function () {
 
   //after the loop ends, player is either out of health or enemies to fight so run the endGame function
   endGame();
-
-  //play again 
-  startGame();
 };
 
 // function to end the entire game 
 var endGame = function () {
-
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
+  window.alert("The game has now ended. Let's see how you did!");
 
   //if player is still alive, player wins!
   if (playerInfo.health > 0) {
@@ -168,15 +137,9 @@ var endGame = function () {
   }
 };
 
+
+//shop 
 var shop = function () {
-
-  //function to generate a random numeric value 
-  var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min +1) + min);
-
-    return value;
-  };
-
   //ask player what they'd like to do
   var shopOptionPrompt = window.prompt (
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
@@ -237,7 +200,7 @@ upgradeAttack: function() {
   else {
     window.alert("You don't have enough money!");
   }
-}
+ }
 };
 
 // enemy info 
@@ -255,6 +218,11 @@ var enemyInfo = [
     attack: randomNumber(10,14)
   }
 ];
+
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
 
 //start the game when the page loads
 startGame();
